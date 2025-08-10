@@ -1,0 +1,60 @@
+# CSE Stock Prediction Platform Configuration
+
+# Database Configuration
+database:
+  uri: "sqlite:///data/agenticfa.db"
+  echo: false
+  
+# Data Sources Configuration
+data_sources:
+  cse_base_url: "https://www.cse.lk"
+  throttle_delay: 1.0  # seconds between requests
+  timeout: 30  # request timeout in seconds
+  
+# Model Configuration
+models:
+  prediction_horizons: [1, 5, 20]  # prediction days
+  target_type: "forward_returns"  # cumulative forward returns
+  train_window_days: 252  # trading days (~1 year)
+  validation_split: 0.2
+  
+  # LightGBM parameters
+  lgbm:
+    num_leaves: 31
+    learning_rate: 0.1
+    feature_fraction: 0.9
+    bagging_fraction: 0.8
+    bagging_freq: 5
+    verbose: -1
+    
+# Feature Engineering
+features:
+  technical_indicators: true
+  fundamental_ratios: true
+  sentiment_features: false  # future implementation
+  macro_features: true
+  
+# Embeddings Configuration
+embeddings:
+  model_name: "sentence-transformers/all-MiniLM-L6-v2"
+  dimension: 384
+  index_type: "flat"  # or "ivf" for larger datasets
+  
+# Cache Configuration
+cache:
+  enabled: true
+  ttl_hours: 24
+  cache_dir: "data/cache"
+  
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/agenticfa.log"
+  
+# Paths
+paths:
+  data_dir: "data"
+  models_dir: "models/artifacts"
+  logs_dir: "logs"
+  cache_dir: "data/cache"
