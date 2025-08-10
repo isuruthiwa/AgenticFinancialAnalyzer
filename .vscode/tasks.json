@@ -1,0 +1,17 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run Financial Analyzer",
+			"type": "shell",
+			"command": "streamlit",
+			"args": [
+				"run",
+				"src/main.py"
+			],
+			"group": "build",
+			"isBackground": true,
+			"problemMatcher": []
+		}
+	]
+}
